@@ -1,0 +1,30 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">    
+        <title>Sign Up page</title>
+    </head>
+    <body>
+        <div class="card">
+            {% if message %}
+                <h3 class="card-heading" style="text-align:center;">{{ message }}</h3>
+            {% endif %}
+            <form class="card-body" action="{% url 'signup' %}" method="post">
+                {% csrf_token %}
+                <label>Username:</label><br>
+                <input class="form-control" required name="username" type="text"/><br>
+
+                <label>Email:</label><br>
+                <input class="form-control" required name="email" type="email"/><br>
+
+                <label>Password:</label><br>
+                <input class="form-control" required name="password" type="password"/><br><br>
+
+                <input class="form-control btn btn-primary" type="submit" value="Sign Up"/>
+            </form>
+                <div class="card-footer" style="text-align:center;">
+                    <a href="{% url 'login' %}">Log In!</a>
+                </div>
+        </div>
+    </body>
+</html>
