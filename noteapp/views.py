@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.urls import reverse
 from django.contrib.auth.models import User
+from rest_framework.exceptions import ValidationError
 from .models import Notes
 
 
@@ -41,7 +42,7 @@ def login_check(request):
 def new_user(request):
     #print("in new_user")
     if not request.user.is_authenticated:
-        return render(request, "noteapp/new_user.html", {"message":"After Successfull Signup Redirected to login page!"})
+        return render(request, "noteapp/new_user.html", {"message":"After Successfull Signup automatic login take place!"})
     return HttpResponseRedirect(reverse("index"))
 
 def signup(request):
@@ -72,9 +73,13 @@ def storenote(request):
     heading = request.POST["heading"]
     notes = request.POST["note"]
     user = request.user
-    p = Notes(heading=heading, user=user, notes=notes)
-    p.save()
-    return HttpResponseRedirect(reverse("index"))
+    try:
+        notesexist = Notes.objects.get(heading=heading, user=user)
+    except Notes.DoesNotExist:
+        p = Notes(heading=heading, user=user, notes=notes)
+        p.save()
+        return HttpResponseRedirect(reverse("index"))
+    raise ValidationError("Same headings already exist.")
 
 def ajax(request):
     if not (request.user.is_authenticated and request.method=="POST" and request.is_ajax()):
