@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.exceptions import ValidationError
+from django.core.exceptions import SuspiciousOperation
 from .models import Notes
 
 
@@ -79,7 +79,8 @@ def storenote(request):
         p = Notes(heading=heading, user=user, notes=notes)
         p.save()
         return HttpResponseRedirect(reverse("index"))
-    raise ValidationError("Same headings already exist.")
+    raise SuspiciousOperation("Invalid request; Same heading already exist.")
+
 
 def ajax(request):
     if not (request.user.is_authenticated and request.method=="POST" and request.is_ajax()):
