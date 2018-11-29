@@ -17,7 +17,7 @@
                 <div class="col-sm-12 col-lg-10">
                     <h1 class="text-center txt-shadow" style="text-shadow: -1px 2px 6px rgba(150, 150, 150, 1);font-size: 5em;word-spacing: 0.3em;">MY NOTE APP</h1>
                 </div>
-                <form class="col-sm-12 col-lg-2" method="post" action="{% url 'logout' %}">
+                <form class="col-sm-12 col-lg-2 text-center" method="post" action="{% url 'logout' %}">
                      {% csrf_token %}
                         <button class="btn btn-info" style="margin-top:15%;">Log out!</button>
                 </form>
@@ -44,6 +44,14 @@
                             </p>
                         <hr>
                         <ul>
+
+                            <li>
+                                <strong>Instruction:</strong>
+                                <p style="font-family: 'Lato', sans-serif;">
+                                    Notes heading must be unique in all your notes.
+                                </p>
+                            </li>
+
                             <li>
                                 <strong>Permanent Storage of the data:</strong>
                                 <p style="font-family: 'Lato', sans-serif;">
@@ -61,9 +69,10 @@
                             <li>
                             <strong>Privary Assurance:</strong>
                                 <p style="font-family: 'Lato', sans-serif;"> 
-                                    Yours notes are always safe with django built in security features.
+                                    Yours notes are always safe with built in security features.
                                 </p>
                             </li>
+                        
                         </ul>
                         
                     </div>      
