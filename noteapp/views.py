@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.urls import reverse
 from django.contrib.auth.models import User
-from rest_framework.exceptions import ValidationError
+from django.exceptions import ValidationError
 from .models import Notes
 
 
