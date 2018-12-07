@@ -11,5 +11,5 @@
   feature of My-Note-App
   1. fully mobile Responsive.
   2. Registration, Login and Logout.
-  3. Notes are stored on SqlLite database.
+  3. Notes are stored on Postgresql database.
 
